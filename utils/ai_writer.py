@@ -1,12 +1,15 @@
 # utils/ai_writer.py
-
 import os
 import requests
 import re
 import time
-from dotenv import load_dotenv
 
-load_dotenv()
+#  try/except add 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass 
 
 # ============================================================
 # 🔥 PROFESSIONAL MASTER PROMPT

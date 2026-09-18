@@ -1,9 +1,13 @@
 import os
 import requests
-from dotenv import load_dotenv
 import time
 
-load_dotenv()
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 def fetch_images(keyword, per_page=4, max_retries=3):
     """

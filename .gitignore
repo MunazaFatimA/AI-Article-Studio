@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Environment
+.env
+
+# Build outputs (EXE ke liye)
+build/
+dist/
+*.spec
+*.spec.txt
+hooks/
+*.bat
+
+# Streamlit
+.streamlit/secrets.toml

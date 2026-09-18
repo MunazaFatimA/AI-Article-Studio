@@ -6,3 +6,4 @@ groq>=0.4.0
 google-generativeai>=0.3.0
 pillow>=10.0.0
 humano
+numpy>=2.0.0,<3.0.0  # Compatible with Python 3.14

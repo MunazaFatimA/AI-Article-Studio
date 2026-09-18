@@ -1,3 +1,29 @@
+# ============================================================
+# 🔑 API KEYS LOADER — Streamlit Cloud + Local
+# ============================================================
+
+import os as _os
+
+# Load keys from Streamlit Secrets into environment variables
+# so that utils/ files using os.getenv() can find them
+try:
+    for _key in [
+        "GROQ_API_KEY",
+        "GEMINI_API_KEY",
+        "OPENROUTER_API_KEY",
+        "COHERE_API_KEY",
+        "TAVILY_API_KEY",
+        "UNSPLASH_API_KEY",
+        "PEXELS_API_KEY",
+    ]:
+        if _key in st.secrets:
+            _os.environ[_key] = st.secrets[_key]
+except Exception:
+    # Local development: .env file will be used by load_dotenv() in utils/
+    pass
+
+# ============================================================
+
 import streamlit as st
 import time
 import re
@@ -7,6 +33,17 @@ from utils.humanizer import humanize_text
 from utils.images import fetch_images, get_fallback_images
 from utils.doc_export import export_to_docx
 from utils.ai_detector import detect_ai, get_detailed_report
+
+import os
+import sys
+import warnings
+os.environ['OPENBLAS_NUM_THREADS'] = '1'
+os.environ['MKL_NUM_THREADS'] = '1'
+os.environ['OMP_NUM_THREADS'] = '1'
+os.environ['PYTORCH_NO_CUDA_MEMORY_CACHING'] = '1'
+os.environ['NUMEXPR_NUM_THREADS'] = '1'
+warnings.filterwarnings("ignore", category=UserWarning)
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 from PIL import Image
 
