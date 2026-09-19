@@ -1,30 +1,22 @@
 # ============================================================
 # 🔑 API KEYS LOADER — Streamlit Cloud + Local
 # ============================================================
+import streamlit as st
+import os
 
-import os as _os
-
-# Load keys from Streamlit Secrets into environment variables
-# so that utils/ files using os.getenv() can find them
+# Streamlit secrets ko environment mein daalo
+# Taake utils/ ki files bhi keys padh sakein
 try:
-    for _key in [
-        "GROQ_API_KEY",
-        "GEMINI_API_KEY",
-        "OPENROUTER_API_KEY",
-        "COHERE_API_KEY",
-        "TAVILY_API_KEY",
-        "UNSPLASH_API_KEY",
-        "PEXELS_API_KEY",
-    ]:
-        if _key in st.secrets:
-            _os.environ[_key] = st.secrets[_key]
+    for key_name in ["GROQ_API_KEY", "GEMINI_API_KEY", "OPENROUTER_API_KEY", 
+                     "COHERE_API_KEY", "TAVILY_API_KEY", "UNSPLASH_API_KEY", "PEXELS_API_KEY"]:
+        if key_name in st.secrets:
+            os.environ[key_name] = st.secrets[key_name]
 except Exception:
-    # Local development: .env file will be used by load_dotenv() in utils/
-    pass
+    pass  # Local pe .env se chalti rahegi
+
 
 # ============================================================
 
-import streamlit as st
 import time
 import re
 from utils.ai_writer import generate_article
@@ -34,7 +26,6 @@ from utils.images import fetch_images, get_fallback_images
 from utils.doc_export import export_to_docx
 from utils.ai_detector import detect_ai, get_detailed_report
 
-import os
 import sys
 import warnings
 os.environ['OPENBLAS_NUM_THREADS'] = '1'
@@ -46,7 +37,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 from PIL import Image
-
+st.write("Groq Key:", " found" if os.getenv("GROQ_API_KEY") else " empty")
 # ---------- PAGE CONFIG ----------
 st.set_page_config(
     page_title="ArticleForge",
